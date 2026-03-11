@@ -624,6 +624,16 @@ export default function App() {
     ? { label: "INCONCLUSIVE", color: "#ffaa00", bg: "#ffaa0015" }
     : { label: "LIKELY AUTHENTIC", color: "#00ffe7", bg: "#00ffe715" };
 
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => console.error(`Error attempting to enable fullscreen: ${err.message}`));
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
+
   // Helper to determine title and subtitle based on tab
   const getHeaderInfo = () => {
     if (activeTab === "image") return ["FAKIES::SCAN", "DEEPFAKE FORENSIC ANALYSIS SYSTEM"];
@@ -684,6 +694,17 @@ export default function App() {
               onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff08")}
               onMouseOut={e => !e.target.style.background.includes("15") && (e.target.style.background = "transparent")}>
               ◈ NEWS ANALYSIS
+            </button>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "auto" }}>
+            <p style={{ fontFamily: "'Orbitron', monospace", fontSize: "11px", color: "#ffffff50", letterSpacing: "2px", margin: "0 0 12px 4px", borderTop: "1px solid #ffffff10", paddingTop: "24px" }}>SYSTEM</p>
+            <button 
+              onClick={toggleFullScreen}
+              style={{ textAlign: "left", background: "transparent", border: "none", borderLeft: "3px solid transparent", color: "#ffffff60", padding: "16px 20px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "12px", letterSpacing: "2px", transition: "all 0.3s ease", borderRadius: "0 4px 4px 0" }}
+              onMouseOver={e => e.target.style.background = "#ffffff08"}
+              onMouseOut={e => e.target.style.background = "transparent"}>
+              ⛶ FULLSCREEN
             </button>
           </div>
         </div>
