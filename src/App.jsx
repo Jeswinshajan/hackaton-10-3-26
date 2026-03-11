@@ -638,8 +638,13 @@ export default function App() {
   const headerColor = getHeaderColor();
   const [headerTitle, headerSubtitle] = getHeaderInfo();
 
+  const getBackgroundGlows = () => {
+    if (activeTab === "image") return "radial-gradient(ellipse at 20% 50%, #001a2e 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #001a2e 0%, transparent 50%)";
+    return "radial-gradient(ellipse at 20% 50%, #1a1500 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #1a1500 0%, transparent 50%)";
+  };
+
   return (
-    <div style={{ minHeight: "100vh", width: "100%", background: "#080c10", fontFamily: "'Courier New', monospace", color: "#e0e8f0", backgroundImage: "radial-gradient(ellipse at 20% 50%, #001a2e 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #0a1a0a 0%, transparent 50%)", margin: 0, padding: 0 }}>
+    <div style={{ minHeight: "100vh", width: "100%", background: "#080c10", fontFamily: "'Courier New', monospace", color: "#e0e8f0", backgroundImage: getBackgroundGlows(), margin: 0, padding: 0, transition: "background-image 0.5s ease" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
         html, body { margin: 0; padding: 0; overflow: hidden; }
@@ -648,10 +653,10 @@ export default function App() {
         @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.4 } }
         @keyframes flicker { 0%,100%{opacity:1} 92%{opacity:1} 93%{opacity:0.8} 94%{opacity:1} 96%{opacity:0.9} 97%{opacity:1} }
         @keyframes gridPan { 0%{background-position:0 0} 100%{background-position:40px 40px} }
-        ::-webkit-scrollbar{width:4px} ::-webkit-scrollbar-track{background:#0a0f14} ::-webkit-scrollbar-thumb{background:#00ffe730}
+        ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:#060a0f} ::-webkit-scrollbar-thumb{background:${headerColor}50; border-radius:3px} ::-webkit-scrollbar-thumb:hover{background:${headerColor}80}
       `}</style>
 
-      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(#00ffe705 1px, transparent 1px), linear-gradient(90deg, #00ffe705 1px, transparent 1px)", backgroundSize: "40px 40px", animation: "gridPan 8s linear infinite" }} />
+      <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: `linear-gradient(${headerColor}06 1px, transparent 1px), linear-gradient(90deg, ${headerColor}06 1px, transparent 1px)`, backgroundSize: "40px 40px", animation: "gridPan 8s linear infinite", transition: "background-image 0.5s ease" }} />
 
       <div style={{ display: "flex", minHeight: "100vh", position: "relative", zIndex: 1 }}>
         {/* SIDEBAR */}
@@ -665,18 +670,18 @@ export default function App() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <p style={{ fontFamily: "'Orbitron', monospace", fontSize: "10px", color: "#ffffff40", letterSpacing: "2px", margin: "0 0 12px 4px" }}>MODULES</p>
+            <p style={{ fontFamily: "'Orbitron', monospace", fontSize: "11px", color: "#ffffff50", letterSpacing: "2px", margin: "0 0 12px 4px" }}>MODULES</p>
             <button 
               onClick={() => { setActiveTab("image"); setStage("idle"); setImageUrl(null); setChecks({}); setScores({}); setOverallScore(0); }}
-              style={{ textAlign: "left", background: activeTab === "image" ? "#00ffe715" : "transparent", border: "none", borderLeft: `3px solid ${activeTab === "image" ? "#00ffe7" : "transparent"}`, color: activeTab === "image" ? "#00ffe7" : "#ffffff60", padding: "14px 16px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "12px", letterSpacing: "2px", transition: "all 0.2s ease" }}
-              onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff05")}
+              style={{ textAlign: "left", background: activeTab === "image" ? `${headerColor}15` : "transparent", border: "none", borderLeft: `3px solid ${activeTab === "image" ? headerColor : "transparent"}`, color: activeTab === "image" ? headerColor : "#ffffff60", padding: "16px 20px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "14px", fontWeight: activeTab === "image" ? "700" : "400", letterSpacing: "2px", transition: "all 0.3s ease", borderRadius: "0 4px 4px 0" }}
+              onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff08")}
               onMouseOut={e => !e.target.style.background.includes("15") && (e.target.style.background = "transparent")}>
               ◎ IMAGE DETECT
             </button>
             <button 
               onClick={() => { setActiveTab("news"); setStage("idle"); setImageUrl(null); setChecks({}); setScores({}); setOverallScore(0); }}
-              style={{ textAlign: "left", background: activeTab === "news" ? "#ffaa0015" : "transparent", border: "none", borderLeft: `3px solid ${activeTab === "news" ? "#ffaa00" : "transparent"}`, color: activeTab === "news" ? "#ffaa00" : "#ffffff60", padding: "14px 16px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "12px", letterSpacing: "2px", transition: "all 0.2s ease" }}
-              onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff05")}
+              style={{ textAlign: "left", background: activeTab === "news" ? `${headerColor}15` : "transparent", border: "none", borderLeft: `3px solid ${activeTab === "news" ? headerColor : "transparent"}`, color: activeTab === "news" ? headerColor : "#ffffff60", padding: "16px 20px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "14px", fontWeight: activeTab === "news" ? "700" : "400", letterSpacing: "2px", transition: "all 0.3s ease", borderRadius: "0 4px 4px 0" }}
+              onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff08")}
               onMouseOut={e => !e.target.style.background.includes("15") && (e.target.style.background = "transparent")}>
               ◈ NEWS ANALYSIS
             </button>
