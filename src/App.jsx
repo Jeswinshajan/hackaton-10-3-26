@@ -627,14 +627,12 @@ export default function App() {
   // Helper to determine title and subtitle based on tab
   const getHeaderInfo = () => {
     if (activeTab === "image") return ["FAKIES::SCAN", "DEEPFAKE FORENSIC ANALYSIS SYSTEM"];
-    if (activeTab === "news") return ["FAKIES::NEWS", "NEWS CREDIBILITY VERIFICATION"];
-    return ["FAKIES::PHISH", "PHISHING & SOCIAL ENGINEERING DETECTION"];
+    return ["FAKIES::NEWS", "NEWS CREDIBILITY VERIFICATION"];
   };
 
   const getHeaderColor = () => {
     if (activeTab === "image") return "#00ffe7";
-    if (activeTab === "news") return "#ffaa00";
-    return "#c084fc"; // Purple for Phishing
+    return "#ffaa00";
   };
 
   const headerColor = getHeaderColor();
@@ -681,13 +679,6 @@ export default function App() {
               onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff05")}
               onMouseOut={e => !e.target.style.background.includes("15") && (e.target.style.background = "transparent")}>
               ◈ NEWS ANALYSIS
-            </button>
-            <button 
-              onClick={() => { setActiveTab("phishing"); setStage("idle"); setImageUrl(null); setChecks({}); setScores({}); setOverallScore(0); }}
-              style={{ textAlign: "left", background: activeTab === "phishing" ? "#c084fc15" : "transparent", border: "none", borderLeft: `3px solid ${activeTab === "phishing" ? "#c084fc" : "transparent"}`, color: activeTab === "phishing" ? "#c084fc" : "#ffffff60", padding: "14px 16px", cursor: "pointer", fontFamily: "'Orbitron', monospace", fontSize: "12px", letterSpacing: "2px", transition: "all 0.2s ease" }}
-              onMouseOver={e => !e.target.style.background.includes("15") && (e.target.style.background = "#ffffff05")}
-              onMouseOut={e => !e.target.style.background.includes("15") && (e.target.style.background = "transparent")}>
-              ✉ PHISHING SCAN
             </button>
           </div>
         </div>
@@ -789,7 +780,6 @@ export default function App() {
         )}
         
         {activeTab === "news" && <NewsCredibilityTab />}
-        {activeTab === "phishing" && <PhishingDetectionTab />}
           </div>
         </div>
       </div>
